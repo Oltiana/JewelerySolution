@@ -9,6 +9,8 @@ const Dashboard = () => {
       <h2>Welcome, {user?.email}</h2>
       <button onClick={logout}>Logout</button>
     </div>
+    
+
   );
 };
 
