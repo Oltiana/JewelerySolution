@@ -1,0 +1,41 @@
+﻿body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f9f7f3;
+}
+
+h2,
+h5 {
+    font-family: 'Playfair Display', serif;
+}
+
+.card {
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.btn-custom {
+    background: linear-gradient(90deg, #bfa46f, #f7e7c6);
+    border: none;
+    color: #000;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+    .btn-custom:hover {
+        background: linear-gradient(90deg, #f7e7c6, #bfa46f);
+    }
+
+.order-summary {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+input,
+textarea,
+select {
+    border-radius: 8px;
+}
+
+label {
+    font-weight: 600;
+}

@@ -1,0 +1,37 @@
+﻿body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f7f3;
+}
+
+.navbar .nav-link {
+    font-weight: 300;
+}
+
+    .navbar .nav-link:hover {
+        color: #101010;
+    }
+
+.navbar-brand .logo {
+    height: 75px;
+    width: auto ;
+    margin: 0;
+    padding: 0;
+}
+
+
+.cart-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: red;
+    color: white;
+    font-size: 0.7rem;
+    padding: 0 5px;
+    border-radius: 50%;
+}
+
+.content-card {
+    min-height: 200px;
+}

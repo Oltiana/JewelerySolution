@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+<html lang="sq">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Checkout - Jewelry</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Montserrat&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="css/checkout.css">
+</head>
+
+<body>
+    <div class="container my-5">
+        <h2 class="mb-4">Checkout</h2>
+
+        <div class="row">
+            <!-- Totali i porosisë -->
+            <div class="col-lg-4 checkout-section">
+                <div class="card p-4">
+                    <h5>Totali i porosisë</h5>
+                    <div id="cartSummary" class="order-summary mt-3"></div>
+
+                    <div class="d-flex justify-content-between mt-3">
+                        <span>Nëntotali:</span>
+                        <span id="subtotal">0 €</span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span>TVSH 18%:</span>
+                        <span id="tax">0 €</span>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between fw-bold fs-5">
+                        <span>Total:</span>
+                        <span id="grandTotal">0 €</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Forma e checkout -->
+            <div class="col-lg-8 checkout-section">
+                <form id="checkoutForm">
+                    <h5>Transporti dhe faturimi</h5>
+                    <div class="mb-3">
+                        <label for="fullName" class="form-label">Emri i plotë</label>
+                        <input type="text" class="form-control" id="fullName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Adresa</label>
+                        <input type="text" class="form-control" id="address" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="city" class="form-label">Qyteti</label>
+                        <input type="text" class="form-control" id="city" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="postalCode" class="form-label">Kodi postar</label>
+                        <input type="text" class="form-control" id="postalCode" required>
+                    </div>
+
+                    <h5>Mënyra e pagesës</h5>
+                    <div class="mb-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="payment" id="cash" value="Cash" required>
+                            <label class="form-check-label" for="cash">Cash</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="payment" id="online" value="Online"
+                                   required>
+                            <label class="form-check-label" for="online">Online</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="payment" id="transfer" value="Transfer"
+                                   required>
+                            <label class="form-check-label" for="transfer">Transfer</label>
+                        </div>
+                    </div>
+
+                    <h5>Data e dërgesës + Koment</h5>
+                    <div class="mb-3">
+                        <label for="deliveryDate" class="form-label">Data e dërgesës</label>
+                        <input type="date" class="form-control" id="deliveryDate" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="comment" class="form-label">Koment opsional</label>
+                        <textarea class="form-control" id="comment" rows="3"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-danger w-100">Blej</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="js/checkout.js"></script>
+</body>
+
+</html>

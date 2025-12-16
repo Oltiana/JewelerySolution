@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <title>Navbar Account System</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/navbar.css">
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">
+                <img class="logo" src="./images/logo.png.jpg" alt="logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Products</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Rings</a></li>
+                            <li><a class="dropdown-item" href="#">Necklaces</a></li>
+                            <li><a class="dropdown-item" href="#">Earrings</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="navbar-nav align-items-center">
+                    <li class="nav-item me-3">
+                        <a class="nav-link position-relative" href="card.html">
+                            <i class="bi bi-bag fs-5"></i>
+                            <span class="cart-badge">0</span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                            <i class="bi bi-person fs-5"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#" onclick="showProfile()">Të dhënat personale</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="showOrders()">Porositë</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="showAddress()">Adresat</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="showCards()">Kartelat e ruajtura</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="showLanguage()">Gjuha & Shteti</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-danger" href="#">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- CONTENT -->
+    <div class="container mt-5">
+        <div class="card p-4 content-card" id="accountContent">
+            <h4>Mirë se vini 👋</h4>
+            <p>Zgjidh një opsion nga llogaria.</p>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/navbar.js"></script>
+</body>
+</html>
