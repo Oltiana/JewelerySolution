@@ -2,12 +2,12 @@
 using System;
 
 [ApiController]
-[Route("api/orders")]
-public class OrderController : ControllerBase
+[Route("api/customer/orders")]
+public class CustomerOrderController : ControllerBase
 {
     private readonly AppDbContext _context;
 
-    public OrderController(AppDbContext context)
+    public CustomerOrderController(AppDbContext context)
     {
         _context = context;
     }
@@ -23,5 +23,16 @@ public class OrderController : ControllerBase
         _context.SaveChanges();
 
         return Ok(new { message = "Porosia u krye me sukses", order });
+    }
+
+    [HttpGet("{customerEmail}")]
+    public IActionResult GetCustomerOrders(string customerEmail)
+    {
+        var orders = _context.Orders
+            .Include(o => o.Items)
+            .Where(o => o.CustomerEmail == customerEmail)
+            .ToList();
+
+        return Ok(orders);
     }
 }
