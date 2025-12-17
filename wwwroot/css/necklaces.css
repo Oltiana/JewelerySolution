@@ -1,0 +1,77 @@
+﻿body {
+    background-color: #f9f7f3;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.navbar {
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* ===== Necklace Cards ===== */
+.ring-card {
+    background-color: #fff;
+    border: none;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+    .ring-card img {
+        height: 300px;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    .ring-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 22px rgba(0,0,0,0.15);
+    }
+
+        .ring-card:hover img {
+            transform: scale(1.04);
+        }
+
+.card-body {
+    padding: 1rem;
+}
+
+.card-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.price {
+    color: #b38b00;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 4px;
+}
+
+.stock {
+    font-size: 0.85rem;
+    margin-bottom: 0.6rem;
+}
+
+.add-btn {
+    background-color: transparent;
+    border: 1px solid #000;
+    border-radius: 6px;
+    padding: 5px 14px;
+    font-size: 0.9rem;
+    transition: background 0.3s, color 0.3s;
+}
+
+    .add-btn:hover {
+        background-color: #000;
+        color: #fff;
+    }
+
+    .add-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+footer {
+    font-size: 0.9rem;
+}
