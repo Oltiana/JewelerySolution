@@ -40,7 +40,6 @@ document.getElementById("checkoutForm").addEventListener("submit", function (e) 
         return;
     }
 
-    // Merr vlerat nga forma
     const order = {
         fullName: document.getElementById("fullName").value,
         address: document.getElementById("address").value,
@@ -55,7 +54,7 @@ document.getElementById("checkoutForm").addEventListener("submit", function (e) 
     console.log("Porosia:", order);
     alert("Porosia u përfundua me sukses!");
     localStorage.removeItem("cart");
-    window.location.href = "index.html"; // ridrejto tek home pas blerjes
+    window.location.href = "index.html"
 });
 
 renderSummary();

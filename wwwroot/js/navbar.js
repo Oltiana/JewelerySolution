@@ -1,11 +1,9 @@
 ﻿const content = document.getElementById("accountContent");
 
-// Statusi i përdoruesit dhe gjuha aktuale
 let isLoggedIn = true;
 let currentLang = "sq";
 let currentSection = "";
 
-// Tekste
 const texts = {
     sq: {
         welcome: "Mirë se vini 👋", chooseOption: "Zgjidh një opsion nga llogaria.",
@@ -25,7 +23,6 @@ const texts = {
     }
 };
 
-// Kartelat dhe produktet
 let cards = [{ number: "**** **** **** 1234", expiry: "08/27" }];
 let cart = [];
 let products = [
@@ -34,7 +31,6 @@ let products = [
     { id: 3, name: "Vathë", price: 20, img: "https://via.placeholder.com/150?text=Vathe" }
 ];
 
-// Navbar
 function checkUser() {
     const accountMenu = document.querySelector(".dropdown-menu.dropdown-menu-end");
     if (isLoggedIn) {
@@ -55,7 +51,6 @@ function checkUser() {
     }
 }
 
-// Seksionet
 function showProfile() { currentSection = "profile"; content.innerHTML = `<h4>${texts[currentLang].personalData}</h4><p><strong>Emri:</strong> Loreta</p><p><strong>Email:</strong> loreta@email.com</p><p><strong>Telefoni:</strong> +383 44 000 000</p><div class="mt-3"><button class="btn btn-outline-primary btn-sm me-2">${texts[currentLang].changePassword}</button></div>`; }
 function showOrders() { currentSection = "orders"; content.innerHTML = `<h4>${texts[currentLang].orders}</h4><p>Nuk keni porosi aktive.</p>`; }
 function showAddress() { currentSection = "address"; content.innerHTML = `<h4 class="mb-3">${texts[currentLang].address}</h4><div class="border rounded p-3 bg-light"><p class="mb-2 text-muted">Adresa aktuale</p><p id="currentAddress" class="fw-semibold mb-3">Rr. Nëna Terezë, Prishtinë</p><button class="btn btn-sm btn-outline-dark px-3" onclick="editAddress()"><i class="bi bi-pencil me-1"></i> Ndrysho</button></div>`; }
@@ -74,7 +69,6 @@ function showLogin() { alert("Login form"); }
 function showRegister() { alert("Register form"); }
 function logout() { alert("Ju u shkyqët!"); isLoggedIn = false; checkUser(); currentSection = ""; content.innerHTML = `<h4>${texts[currentLang].welcome}</h4><p>${texts[currentLang].chooseOption}</p>`; }
 
-// Produkte dhe shporta
 function addToCart(id) { const prod = products.find(p => p.id === id); cart.push(prod); document.getElementById("cartCount").innerText = cart.length; alert(prod.name + " u shtua në shportë!"); }
 function showCart() { currentSection = "cart"; let html = `<h4>${texts[currentLang].cart}</h4>`; if (cart.length === 0) { html += `<p>${texts[currentLang].emptyCart}</p>`; } else { cart.forEach((item, index) => { html += `<div class="card mb-2 p-2 d-flex flex-row align-items-center"><img src="${item.img}" alt="${item.name}" style="height:50px;margin-right:10px;"><div><p class="mb-1">${item.name}</p><small>Çmimi: $${item.price}</small></div><button class="btn btn-sm btn-danger ms-auto" onclick="removeFromCart(${index})"><i class="bi bi-trash"></i> ${texts[currentLang].remove}</button><button class="btn btn-sm btn-success ms-2" onclick="checkout(${index})">${texts[currentLang].buyNow}</button></div>`; }); } content.innerHTML = html; }
 function removeFromCart(index) { cart.splice(index, 1); document.getElementById("cartCount").innerText = cart.length; showCart(); }
@@ -83,7 +77,6 @@ function confirmPurchase(index) { const method = document.getElementById("paymen
 
 function showProducts() { currentSection = "products"; let html = "<h4>Produktet</h4><div class='d-flex flex-wrap gap-3'>"; products.forEach(prod => { html += `<div class="card p-2" style="width:180px;"><img src="${prod.img}" alt="${prod.name}" style="height:100px;width:100%;"><p class="mb-1 mt-2">${prod.name}</p><p>Çmimi: $${prod.price}</p><button class="btn btn-primary btn-sm" onclick="addToCart(${prod.id})">Shto në Shportë</button></div>`; }); html += "</div>"; content.innerHTML = html; }
 
-// Load
 window.onload = () => {
     checkUser();
     content.innerHTML = `<h4>${texts[currentLang].welcome}</h4><p>${texts[currentLang].chooseOption}</p>`;

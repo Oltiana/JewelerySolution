@@ -13,16 +13,14 @@
         color: #101010;
     }
 
-/* Logo e navbar-it */
 .navbar-brand .logo {
-    height: 50px;
-    width: auto;
+    height: 75px;
+    width: 100%;
     display: block;
     object-fit: contain;
 }
 
 
-/* Badge e shportës */
 .cart-badge {
     position: absolute;
     top: 0;
@@ -34,7 +32,6 @@
     border-radius: 50%;
 }
 
-/* Card e content-it */
 .content-card {
     min-height: 200px;
 }
