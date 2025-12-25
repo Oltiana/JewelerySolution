@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using JewelerySolution.Models;
 using System.Collections.Generic;
+using JewelerySolution.Models.Basic;
+
 
 namespace JewelerySolution.Data
 {

@@ -1,4 +1,4 @@
-﻿namespace JewelerySolution.Models
+﻿namespace JewelerySolution.Models.Detailed
 {
     public class Order
     {
