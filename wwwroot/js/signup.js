@@ -1,34 +1,50 @@
 const signupForm = document.getElementById("signupForm");
 const errorMsg = document.getElementById("errorMsg");
 
-if (signupForm) {
-    signupForm.addEventListener("submit", function (e) {
-        e.preventDefault();
+signupForm.addEventListener("submit", function (e) {
+  e.preventDefault();
 
-        const firstName = document.getElementById("firstName").value.trim();
-        const lastName = document.getElementById("lastName").value.trim();
-        const email = document.getElementById("email").value.trim();
-        const password = document.getElementById("password").value.trim();
-        const confirmPassword = document.getElementById("confirmPassword").value.trim();
+  const firstName = document.getElementById("firstName").value.trim();
+  const lastName = document.getElementById("lastName").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value.trim();
+  const confirmPassword = document.getElementById("confirmPassword").value.trim();
 
-        if (errorMsg) errorMsg.textContent = "";
+  errorMsg.textContent = "";
 
-        if (!firstName || !lastName || !email || !password || !confirmPassword) {
-            if (errorMsg) errorMsg.textContent = "All fields are required.";
-            return;
-        }
+  if (password !== confirmPassword) {
+    errorMsg.textContent = "Passwords do not match.";
+    return;
+  }
 
-        if (password.length < 6) {
-            if (errorMsg) errorMsg.textContent = "Password must be at least 6 characters long.";
-            return;
-        }
+  if (password.length < 6) {
+    errorMsg.textContent = "Password must be at least 6 characters long.";
+    return;
+  }
 
-        if (password !== confirmPassword) {
-            if (errorMsg) errorMsg.textContent = "Passwords do not match.";
-            return;
-        }
+  const signupData = {
+    firstName: firstName,
+    lastName: lastName,
+    email: email,
+    passwordHash: password
+  };
 
-        alert("Sign Up successful! Welcome, " + firstName + "!");
-        window.location.href = "login.html";
-    });
-}
+  fetch('/api/auth/signup', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(signupData)
+  })
+  .then(response => {
+    if (response.ok) {
+      alert("Registration successful! Please log in.");
+      window.location.href = "login.html";
+    } else {
+      return response.text().then(text => { throw new Error(text) });
+    }
+  })
+  .catch(error => {
+    errorMsg.textContent = "Error: " + error.message;
+  });
+});
