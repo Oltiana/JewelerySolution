@@ -34,3 +34,27 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
+/*
+// Pjesa e Seeding
+try
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        var services = scope.ServiceProvider;
+        var context = services.GetRequiredService<JeweleryDbContext>();
+
+        // Ky rresht siguron që databaza ekziston para se të tentojë seeding
+        context.Database.EnsureCreated();
+
+        DbSeeder.SeedAdminUser(context).GetAwaiter().GetResult();
+    }
+}
+catch (Exception ex)
+{
+    // Kjo do të printojë gabimin në dritaren e zezë pa e mbyllur serverin
+    Console.WriteLine(">>> DATABASE ERROR: " + ex.Message);
+}
+
+app.Run();  
+*/
