@@ -12,16 +12,26 @@ signupForm.addEventListener("submit", function (e) {
 
   errorMsg.textContent = "";
 
+  // --- PIKA 7: VALIDIMI I EMAI-IT (Regex) ---
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    errorMsg.textContent = "Ju lutem jepni një adresë email-i të saktë (p.sh. emri@shembull.com).";
+    return;
+  }
+
+  // VALIDIMI I FJALËKALIMIT
   if (password !== confirmPassword) {
-    errorMsg.textContent = "Passwords do not match.";
+    errorMsg.textContent = "Fjalëkalimet nuk përputhen.";
     return;
   }
 
   if (password.length < 6) {
-    errorMsg.textContent = "Password must be at least 6 characters long.";
+    errorMsg.textContent = "Fjalëkalimi duhet të jetë të paktën 6 karaktere.";
     return;
   }
 
+  // Të dhënat që do të dërgohen në API
+  // Vini re: 'Role' nuk dërgohet këtu sepse Backend-i e vendos automatikisht "User"
   const signupData = {
     firstName: firstName,
     lastName: lastName,
@@ -38,13 +48,14 @@ signupForm.addEventListener("submit", function (e) {
   })
   .then(response => {
     if (response.ok) {
-      alert("Registration successful! Please log in.");
+      alert("Regjistrimi u krye me sukses! Ju lutem kyçuni.");
       window.location.href = "login.html";
     } else {
+      // Nëse emaili ekziston, API do të kthejë një gabim këtu
       return response.text().then(text => { throw new Error(text) });
     }
   })
   .catch(error => {
-    errorMsg.textContent = "Error: " + error.message;
+    errorMsg.textContent = "Gabim: " + error.message;
   });
 });

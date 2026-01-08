@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JewelerySolution.Migrations
 {
     [DbContext(typeof(JeweleryDbContext))]
-    [Migration("20251225201921_NewAuthMigration")]
-    partial class NewAuthMigration
+    [Migration("20260107224620_InitialFinal")]
+    partial class InitialFinal
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -187,6 +187,10 @@ namespace JewelerySolution.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Role")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

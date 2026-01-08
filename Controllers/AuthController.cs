@@ -22,30 +22,37 @@ namespace JewelerySolution.Controllers
         public async Task<IActionResult> Signup([FromBody] User model)
         {
             if (model == null) return BadRequest("Data is empty.");
+
             var userExists = await _context.Users.AnyAsync(u => u.Email == model.Email);
             if (userExists) return BadRequest("This email is already registered.");
 
+            // Kjo siguron që fusha Role të mos jetë bosh (Pika 19)
+            model.Role = "User";
+
             _context.Users.Add(model);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(); // Kjo e dërgon në SQL
             return Ok(new { message = "Registration successful!" });
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] User loginModel)
+        public async Task<IActionResult> Login([FromBody] LoginRequest loginModel)
         {
+            if (loginModel == null) return BadRequest("Të dhënat janë bosh.");
+
             var user = await _context.Users
                 .FirstOrDefaultAsync(u => u.Email == loginModel.Email && u.PasswordHash == loginModel.PasswordHash);
 
             if (user == null)
             {
-                return Unauthorized(new { message = "Invalid email or password." });
+                // Kthejmë vetëm një mesazh të thjeshtë, pa gabime teknike
+                return Unauthorized(new { message = "Email ose fjalëkalim i pasaktë." });
             }
 
             return Ok(new
             {
                 message = "Login successful!",
                 firstName = user.FirstName,
-                userId = user.Id
+                role = user.Role ?? "User"
             });
         }
 
@@ -82,5 +89,10 @@ namespace JewelerySolution.Controllers
             await _context.SaveChangesAsync();
             return Ok(new { message = "Password updated successfully!" });
         }
+    }
+    public class LoginRequest
+    {
+        public string Email { get; set; }
+        public string PasswordHash { get; set; }
     }
 }
