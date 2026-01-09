@@ -1,5 +1,6 @@
-using Microsoft.EntityFrameworkCore;
 using JewelerySolution.Data;
+using Microsoft.EntityFrameworkCore;
+
 
 var builder = WebApplication.CreateBuilder(args);
 

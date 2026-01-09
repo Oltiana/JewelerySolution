@@ -1,20 +1,42 @@
-﻿let cart = JSON.parse(localStorage.getItem("cart")) || [];
+﻿// =======================
+// CART GLOBAL
+// =======================
+let cart = []; // marrim nga backend
 
+// =======================
+// LOAD CART FROM BACKEND
+// =======================
+async function loadCart() {
+    try {
+        const res = await fetch("https://localhost:7075/api/shop/cart");
+        if (!res.ok) throw new Error("Gabim me backend cart");
+        cart = await res.json();
+    } catch (err) {
+        console.error("Gabim me backend, përdor localStorage si fallback", err);
+        cart = JSON.parse(localStorage.getItem("cart")) || [];
+    }
+    renderSummary();
+}
+
+// =======================
+// RENDER SUMMARY
+// =======================
 function renderSummary() {
     const container = document.getElementById("cartSummary");
     container.innerHTML = "";
     let subtotal = 0;
 
     cart.forEach(item => {
+        item.qty = item.qty || 1;
         const total = item.price * item.qty;
         subtotal += total;
 
         container.innerHTML += `
-                <div class="d-flex justify-content-between">
-                    <span>${item.name} x ${item.qty}</span>
-                    <span>${total.toFixed(2)} €</span>
-                </div>
-            `;
+            <div class="d-flex justify-content-between">
+                <span>${item.name} x ${item.qty}</span>
+                <span>${total.toFixed(2)} €</span>
+            </div>
+        `;
     });
 
     const tax = subtotal * 0.18;
@@ -25,7 +47,10 @@ function renderSummary() {
     document.getElementById("grandTotal").innerText = grandTotal.toFixed(2) + " €";
 }
 
-document.getElementById("checkoutForm").addEventListener("submit", function (e) {
+// =======================
+// SUBMIT ORDER
+// =======================
+document.getElementById("checkoutForm").addEventListener("submit", async function (e) {
     e.preventDefault();
 
     if (cart.length === 0) {
@@ -33,13 +58,7 @@ document.getElementById("checkoutForm").addEventListener("submit", function (e) 
         return;
     }
 
-    const user = JSON.parse(localStorage.getItem("user"));
-    if (!user) {
-        alert("Ju lutem regjistrohuni ose kyçuni për të vazhduar blerjen.");
-        window.location.href = "login.html";
-        return;
-    }
-
+    // Merr vlerat nga forma
     const order = {
         fullName: document.getElementById("fullName").value,
         address: document.getElementById("address").value,
@@ -48,13 +67,33 @@ document.getElementById("checkoutForm").addEventListener("submit", function (e) 
         payment: document.querySelector('input[name="payment"]:checked').value,
         deliveryDate: document.getElementById("deliveryDate").value,
         comment: document.getElementById("comment").value,
-        cart: cart
+        cart: cart,
+        total: parseFloat(document.getElementById("grandTotal").innerText)
     };
 
-    console.log("Porosia:", order);
-    alert("Porosia u përfundua me sukses!");
-    localStorage.removeItem("cart");
-    window.location.href = "index.html"
+    try {
+        const res = await fetch("https://localhost:7075/api/shop/checkout", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(order)
+        });
+
+        const data = await res.json();
+        alert(data.message);
+
+        // pastro cart lokalisht dhe ridrejto
+        cart = [];
+        localStorage.removeItem("cart");
+        window.location.href = "index.html";
+    } catch (err) {
+        console.error("Gabim me backend gjatë checkout", err);
+        alert("Gabim gjatë përfundimit të porosisë.");
+    }
 });
 
-renderSummary();
+// =======================
+// ON LOAD
+// =======================
+document.addEventListener("DOMContentLoaded", loadCart);
+
+console.log("checkout.js loaded");
