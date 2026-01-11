@@ -1,4 +1,4 @@
-﻿body {
+body {
     font-family: 'Montserrat', sans-serif;
     margin: 0;
     padding: 0;
@@ -28,8 +28,11 @@
     background: red;
     color: white;
     font-size: 0.7rem;
-    padding: 0 5px;
+    padding: 2px 6px;
     border-radius: 50%;
+    min-width: 18px;
+    text-align: center;
+    line-height: 1.2;
 }
 
 .content-card {

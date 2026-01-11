@@ -1,4 +1,4 @@
-﻿const content = document.getElementById("accountContent");
+const content = document.getElementById("accountContent");
 
 let isLoggedIn = true;
 let currentLang = "sq";
@@ -77,7 +77,29 @@ function confirmPurchase(index) { const method = document.getElementById("paymen
 
 function showProducts() { currentSection = "products"; let html = "<h4>Produktet</h4><div class='d-flex flex-wrap gap-3'>"; products.forEach(prod => { html += `<div class="card p-2" style="width:180px;"><img src="${prod.img}" alt="${prod.name}" style="height:100px;width:100%;"><p class="mb-1 mt-2">${prod.name}</p><p>Çmimi: $${prod.price}</p><button class="btn btn-primary btn-sm" onclick="addToCart(${prod.id})">Shto në Shportë</button></div>`; }); html += "</div>"; content.innerHTML = html; }
 
+// Update cart badge nga localStorage
+function updateCartBadge() {
+    const cartBadge = document.getElementById("cartBadge");
+    if (cartBadge) {
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const totalItems = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
+        cartBadge.textContent = totalItems;
+        if (totalItems === 0) {
+            cartBadge.style.display = "none";
+        } else {
+            cartBadge.style.display = "block";
+        }
+    }
+}
+
 window.onload = () => {
     checkUser();
+    updateCartBadge();
     content.innerHTML = `<h4>${texts[currentLang].welcome}</h4><p>${texts[currentLang].chooseOption}</p>`;
+    
+    // Përditëso badge çdo 500ms për të ndjekur ndryshimet në localStorage
+    setInterval(updateCartBadge, 500);
 }
+
+// Përditëso badge kur faqja shfaqet përsëri
+window.addEventListener('focus', updateCartBadge);

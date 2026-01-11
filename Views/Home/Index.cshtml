@@ -1,8 +1,133 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Admin Dashboard";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome LB</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+    body {
+        background-color: #fdf9f7;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .topbar {
+        background-color: #ffffff;
+        border-bottom: 1px solid #f0e6e0;
+    }
+
+    .brand {
+        font-family: 'Playfair Display', serif;
+        letter-spacing: 1px;
+    }
+
+    .sidebar {
+        background-color: #ffffff;
+        border-right: 1px solid #f0e6e0;
+        min-height: 100vh;
+    }
+
+        .sidebar a {
+            color: #7a5c52;
+            font-weight: 500;
+            padding: 10px 15px;
+            border-radius: 8px;
+        }
+
+            .sidebar a.active,
+            .sidebar a:hover {
+                background-color: #f5e7df;
+                color: #5a3e36;
+            }
+
+    .card-stat {
+        background: linear-gradient(135deg, #fffaf7, #f6ebe5);
+        border: none;
+        border-radius: 18px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+        transition: transform .2s;
+    }
+
+        .card-stat:hover {
+            transform: translateY(-4px);
+        }
+
+        .card-stat h6 {
+            color: #a38b80;
+            font-size: 0.9rem;
+        }
+
+        .card-stat h3 {
+            color: #5a3e36;
+            font-weight: bold;
+        }
+</style>
+
+<div class="topbar py-3 px-4 d-flex justify-content-between align-items-center">
+    <h5 class="brand mb-0">Olore Jewelry Store</h5>
+    <div>
+        <a class="me-3 text-decoration-none text-muted" asp-controller="Home" asp-action="Index">Dashboard</a>
+        <a class="text-decoration-none text-muted" href="/Account/Logout">Logout</a>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+
+        <!-- Sidebar -->
+        <div class="col-md-2 sidebar p-3">
+            <nav class="nav flex-column gap-2">
+                <a class="nav-link active" asp-controller="Home" asp-action="Index">Dashboard</a>
+                <a class="nav-link" href="/Admin/Products">Products</a>
+                <a class="nav-link" asp-controller="Admin" asp-action="Index">Orders</a>
+
+                <a class="nav-link" href="/Admin/Users">Users</a>
+            </nav>
+        </div>
+
+        <!-- Content -->
+        <div class="col-md-10 p-5">
+
+            <h4 class="fw-bold mb-4" style="color:#5a3e36;">
+                Welcome back, Admin ✨
+            </h4>
+
+            <div class="row g-4">
+
+                <div class="col-md-3">
+                    <div class="card card-stat text-center p-4">
+                        <h6>Total Products</h6>
+                        <h3>24</h3>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="card card-stat text-center p-4">
+                        <h6>Total Orders</h6>
+                        <h3>132</h3>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="card card-stat text-center p-4">
+                        <h6>Customers</h6>
+                        <h3>58</h3>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="card card-stat text-center p-4">
+                        <h6>Revenue</h6>
+                        <h3>€8,420</h3>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="mt-5 text-muted">
+                Manage your jewelry store with elegance and confidence 💎
+            </div>
+
+        </div>
+
+    </div>
 </div>

@@ -1,4 +1,4 @@
-﻿// Lista e vathëve
+// Lista e vathëve
 /*const earrings = [
     { name: "Pearl Drop", price: 220, stock: 15, image: "images/41bc8579016491dfd017a40a7a112ea3.jpg" },
     { name: "Bold Muse", price: 780, stock: 6, image: "images/a49aa8f5f44e8d0fe491a0b528d3d4fa.jpg" },

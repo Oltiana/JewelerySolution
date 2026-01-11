@@ -7,6 +7,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\NewFolder\**" />
+    <Content Remove="Views\NewFolder\**" />
+    <EmbeddedResource Remove="Views\NewFolder\**" />
+    <None Remove="Views\NewFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\AdminOrderController.cs" />
+    <Compile Remove="Controllers\CartControlle.cs" />
+    <Compile Remove="Controllers\CustomerOrderController.cs" />
+    <Compile Remove="Controllers\OrderController.cs" />
+    <Compile Remove="Models\CartItem.cs" />
+    <Compile Remove="Models\OrderItem.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.8">
       <PrivateAssets>all</PrivateAssets>
