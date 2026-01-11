@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using JewelerySolution.Models;
-using System.Collections.Generic;
+
 
 namespace JewelerySolution.Data
 {
@@ -15,13 +15,19 @@ namespace JewelerySolution.Data
                 .Property(p => p.Price)
                 .HasPrecision(18, 2);
 
+            // Konfiguro emrin e tabelës për OrderItem
+            modelBuilder.Entity<OrderItem>()
+                .ToTable("OrderItem");
+
             base.OnModelCreating(modelBuilder);
         }
 
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
-        public DbSet<OrderDto> Orders { get; set; }
 
+        public DbSet<User> Users { get; set; }
 
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
     }
 }

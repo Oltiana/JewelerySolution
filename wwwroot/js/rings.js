@@ -1,4 +1,4 @@
-﻿
+
 const rings = [
     { name: "Rosé Dream", price: 350, stock: 20, image: "images/image_2025-06-28_23-16-53-273.jpg" },
     { name: "Pure Heart", price: 950, stock: 10, image: "images/image_2025-06-28_23-16-53-545.jpg" },

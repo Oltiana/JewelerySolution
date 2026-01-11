@@ -1,4 +1,4 @@
-﻿
+
 const necklaces = [
     { name: "Golden Sun", price: 420, stock: 12, image: "images/image_2025-07-11_13-53-29-496.jpg" },
     { name: "Ivory Grace", price: 1200, stock: 5, image: "images/4d19e6cce6fa26027c4affb7b65de5cc.jpg" },

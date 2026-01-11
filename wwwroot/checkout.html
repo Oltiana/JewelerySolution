@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="sq">
 
 <head>
@@ -66,14 +66,32 @@
                             <label class="form-check-label" for="cash">Cash</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="payment" id="online" value="Online"
+                            <input class="form-check-input" type="radio" name="payment" id="card" value="Card"
                                    required>
-                            <label class="form-check-label" for="online">Online</label>
+                            <label class="form-check-label" for="card">Card</label>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="payment" id="transfer" value="Transfer"
-                                   required>
-                            <label class="form-check-label" for="transfer">Transfer</label>
+                    </div>
+
+                    <!-- Fushat për Card -->
+                    <div id="cardFields" style="display: none;">
+                        <h6 class="mt-3 mb-3">Informacioni i kartës</h6>
+                        <div class="mb-3">
+                            <label for="cardNumber" class="form-label">Numri i kartës</label>
+                            <input type="text" class="form-control" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="cardExpiry" class="form-label">Data e skadimit</label>
+                                <input type="text" class="form-control" id="cardExpiry" placeholder="MM/YY" maxlength="5">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="cardCVV" class="form-label">CVV</label>
+                                <input type="text" class="form-control" id="cardCVV" placeholder="123" maxlength="3">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="cardHolder" class="form-label">Emri në kartë</label>
+                            <input type="text" class="form-control" id="cardHolder" placeholder="Emri i plotë">
                         </div>
                     </div>
 
