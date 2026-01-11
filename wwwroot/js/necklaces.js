@@ -1,22 +1,22 @@
 ﻿
-const necklaces = [
+/*const necklaces = [
     { name: "Golden Sun", price: 420, stock: 12, image: "images/image_2025-07-11_13-53-29-496.jpg" },
     { name: "Ivory Grace", price: 1200, stock: 5, image: "images/4d19e6cce6fa26027c4affb7b65de5cc.jpg" },
     { name: "Pure Muse", price: 210, stock: 0, image: "images/image_2025-07-11_13-59-04-021.jpg" },
     { name: "Clarity", price: 480, stock: 7, image: "images/image_2025-07-11_14-01-31-012.jpg" }
-];
+];*/
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-function displayNecklaces(data) {
-    const container = document.getElementById("necklacesContainer");
+function displayProducts(data, containerId) {
+    const container = document.getElementById(containerId);
     container.innerHTML = "";
 
     data.forEach(item => {
         container.innerHTML += `
       <div class="col-sm-6 col-lg-4 mb-4">
         <div class="card ring-card">
-          <img src="${item.image}" class="card-img-top" alt="${item.name}">
+          <img src="${item.imageUrl}" class="card-img-top" alt="${item.name}">
           <div class="card-body text-center">
             <h5 class="card-title">${item.name}</h5>
             <p class="price">€${item.price}</p>
@@ -24,7 +24,7 @@ function displayNecklaces(data) {
             <button class="btn add-btn addCartBtn"
                 data-name="${item.name}"
                 data-price="${item.price}"
-                data-image="${item.image}"
+                data-image="${item.imageUrl}"
                 ${item.stock === 0 ? 'disabled' : ''}>
                 ${item.stock === 0 ? 'Nuk ka stok' : 'Shto në Shportë'}
             </button>
@@ -56,4 +56,8 @@ function displayNecklaces(data) {
     });
 }
 
-displayNecklaces(necklaces);
+// Merr produktet nga API
+fetch('/api/Products/category/Necklaces')
+    .then(res => res.json())
+    .then(data => displayProducts(data, 'necklacesContainer'))
+    .catch(err => console.error(err));
