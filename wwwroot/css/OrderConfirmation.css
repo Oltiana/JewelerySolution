@@ -1,0 +1,46 @@
+body {
+  margin: 0;
+  font-family: 'Georgia', serif;
+  background: #ffffff;
+  color: #1f2a44;
+}
+
+.confirmation-container {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+h1 {
+  color: #c39a5b;
+  font-size: 42px;
+  margin-bottom: 40px;
+}
+
+.heart {
+  width: 140px;
+  height: 140px;
+  margin: 0 auto 30px;
+  background: #8b0000;
+  clip-path: path('M70 120 L10 60 A30 30 0 0 1 70 20 A30 30 0 0 1 130 60 Z');
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.heart img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.confirmed {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.order {
+  color: #c39a5b;
+  font-size: 18px;
+  font-weight: bold;
+}

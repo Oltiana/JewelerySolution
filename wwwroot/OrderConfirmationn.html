@@ -110,3 +110,64 @@
     </script>
 </body>
 </html>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Order Confirmation</title>
+<link rel="stylesheet" href="OrderConfirmation.css" />
+</head>
+<body>
+<div class="confirmation-container">
+<h1>Thank You for Your Purchase!</h1>
+
+
+	<div class="heart" aria-hidden="true">
+		<img src="/images/order%20box.jpg" alt="Order heart" />
+	</div>
+
+
+<p class="confirmed">Your order has been confirmed!</p>
+<p class="order">Order Number: <span>#12345</span></p>
+</div>
+
+
+<script src="script.js"></script>
+	<script>
+		// If opened by popup.js, requestOrderData -> postMessage flow
+		window.addEventListener('message', (e) => {
+			// only accept same-origin in this demo
+			if (e.origin !== location.origin) return;
+			if (e.data && e.data.type === 'orderData') {
+				populateOrderFromData(e.data.data);
+			}
+		});
+
+		// If a parent opens the window, ask parent to send data
+		if (window.opener) {
+			window.opener.postMessage({ type: 'requestOrderData' }, location.origin);
+		}
+
+		function populateOrderFromData(data = {}) {
+			if (!data) return;
+			if (data.orderNumber) document.getElementById('order-number').textContent = data.orderNumber;
+			if (data.email) document.getElementById('order-email').textContent = data.email;
+			// If items provided, update table rows (basic implementation)
+			if (Array.isArray(data.items) && data.items.length) {
+				const tbody = document.querySelector('.order-table tbody');
+				tbody.innerHTML = '';
+				data.items.forEach((it, idx) => {
+					const tr = document.createElement('tr');
+					tr.innerHTML = `<td class="item" contenteditable="true">${it.item}</td><td><input class="qty" type="number" min="1" value="${it.qty || 1}"></td><td class="price">${(it.price||0).toFixed(2)}</td><td class="actions"><button class="up">↑</button><button class="down">↓</button><button class="remove">Remove</button></td>`;
+					tbody.appendChild(tr);
+				});
+				// trigger totals recalculation if script.js is loaded
+				if (typeof updateTotals === 'function') updateTotals();
+			}
+		}
+	</script>
+</body>
+</html>
