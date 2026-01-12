@@ -49,4 +49,11 @@ body{font-family:Segoe UI, Tahoma, Arial, sans-serif;background:var(--bg);color:
   .order-table tbody tr{margin-bottom:12px;display:block;border:1px solid #eee;border-radius:8px;overflow:hidden}
   .order-table tbody td:nth-child(1){font-weight:600}
   .order-controls{justify-content:center}
+
+  img{
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
 }

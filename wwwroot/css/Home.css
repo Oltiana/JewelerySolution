@@ -10,7 +10,7 @@ body {
   color: #1e1e1e;
 }
 
-/* Make images responsive by default */
+
 img {
   max-width: 100%;
   height: auto;
@@ -23,7 +23,7 @@ img {
   margin: auto;
 }
 
-/* HERO IMAGE */
+
 .hero {
   display: flex;
   flex-direction: column;
@@ -33,11 +33,11 @@ img {
 }
 
 .hero-image {
-  /* Make the hero image smaller and oval */
+  
   width: clamp(160px, 36vw, 360px);
   height: clamp(120px, 28vw, 260px);
   background: #e5e5e5;
-  border-radius: 50%; /* circle/oval */
+  border-radius: 50%;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -45,14 +45,15 @@ img {
   box-shadow: 0 6px 18px rgba(0,0,0,0.08);
 }
 
-.hero-image img {
+.hero-img{
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
+  max-height: 320px;   
+  object-fit: cover;   
+  border-radius: 12px;
 }
 
-/* Modal close X (used by popup modal fallback) */
+
+
 #order-popup-overlay .modal-close {
   position: absolute;
   top: 10px;
@@ -65,7 +66,6 @@ img {
 }
 @media (prefers-reduced-motion: no-preference){
   #order-popup-overlay .modal-close:hover { transform: scale(1.05); }
-  /* Overlay + modal opening/closing animations */
   #order-popup-overlay {
     opacity: 0;
     transition: opacity 260ms ease;
@@ -92,7 +92,7 @@ img {
 }
 
 .hero-text {
-  text-align: center; /* center the text under the image */
+  text-align: center; 
 }
 
 .hero-text h1 {
@@ -104,13 +104,12 @@ img {
   max-width: 720px;
   margin: 0 auto;
   color: #555;
-  line-height: 1.65; /* more space between lines */
-  margin-top: 6px; /* a bit more gap under the heading */
-  margin-bottom: 12px; /* small gap above the Shop Now button */
+  line-height: 1.65; 
+  margin-top: 6px; 
+  margin-bottom: 12px; 
 }
 
 
-/* PRODUCT SLIDER */
 .product-image {
   position: relative;
   height: clamp(140px, 22vw, 220px);
@@ -122,7 +121,7 @@ img {
   justify-content: center;
 }
 
-/* Make whole product tiles clickable and keyboard-focusable */
+
 .product-link {
   display: block;
   color: inherit;
@@ -159,7 +158,7 @@ img {
   opacity: 1;
 }
 
-/* Product slider controls and dots (consistent format for all product sliders) */
+
 .product-image .prev, .product-image .next {
   position: absolute;
   top: 50%;
@@ -202,7 +201,7 @@ img {
  
 
 
-/* STORY IMAGE */
+
 .story-image {
   overflow: hidden;
   background: #e5e5e5;
@@ -225,7 +224,7 @@ img {
   cursor: pointer;
 }
 
-/* MOST LOVED */
+
 .section-title {
   text-align: center;
   font-size: 26px;
@@ -246,7 +245,6 @@ img {
 
 
 
-/* STORY */
 .story {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -273,7 +271,6 @@ img {
 
 
 
-/* RESPONSIVE */
 @media (max-width: 900px) {
   .hero {
     grid-template-columns: 1fr;
@@ -289,7 +286,7 @@ img {
   }
   }
 
-/* SLIDER (global styling so it works on all screen sizes) */
+
 .slider {
   position: relative;
   width: 100%;
@@ -332,7 +329,6 @@ img {
 .slider:not(.product-image) .prev { left: 10px; z-index:11; }
 .slider:not(.product-image) .next { right: 10px; z-index:11; }
 
-/* Dots (main hero slider only) */
 .slider:not(.product-image) .dots {
   position: absolute;
   left: 50%;
@@ -360,7 +356,7 @@ img {
 
 .slider:not(.product-image) .dot:focus { outline: none; }
 
-/* Ensure hero slider fills the hero area */
+
 .hero-image .slider {
   width: 100%;
   height: 100%;
