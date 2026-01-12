@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jewellery Shop</title>
+  <link rel="stylesheet" href="home.css" />
+
+</head>
+<body>
+
+  <div class="container">
+
+   
+    <section class="hero">
+      <div class="hero-image">
+        <!-- static hero image (slider removed from hero) -->
+        <img src="./images/jewerlly.jpg" alt="Jewellery shop hero">
+      </div>
+
+      <div class="hero-text">
+        <h1>Jewellery Shop</h1>
+        <p>Discover exquisite jewelry that tells your story</p>
+        <button class="btn">Shop Now</button>
+      </div>
+    </section>
+
+    <!-- Demo button removed -->
+
+<!-- standalone slider removed (now inside hero) -->
+
+
+
+   
+    <h2 class="section-title">Our Most Loved Pieces</h2>
+
+    <div class="products">
+      <!-- Rings (slider) -->
+      <div class="product">
+        <a href="rings.html" class="product-link" aria-label="View Rings">
+          <div class="product-image slider">
+            <button class="prev" aria-label="Previous">&#10094;</button>
+            <div class="slides">
+              <img src="./images/rings.jpg" class="slide active" alt="Rings 1">
+              <img src="./images/rings2.jpg" class="slide" alt="Rings 2">
+              <img src="./images/rings3.jpg" class="slide" alt="Rings 3">
+            </div>
+            <button class="next" aria-label="Next">&#10095;</button>
+          </div>
+          <span>Rings</span>
+        </a>
+      </div>
+
+      <!-- Necklaces (slider) -->
+      <div class="product">
+        <a href="necklaces.html" class="product-link" aria-label="View Necklaces">
+          <div class="product-image slider">
+            <button class="prev" aria-label="Previous">&#10094;</button>
+            <div class="slides">
+              <img src="./images/necklace.jpg" class="slide active" alt="Necklaces 1">
+              <img src="./images/necklasce2.jpg" class="slide" alt="Necklaces 2">
+              <img src="./images/necklace3.jpg" class="slide" alt="Necklaces 3">
+            </div>
+            <button class="next" aria-label="Next">&#10095;</button>
+          </div>
+          <span>Necklaces</span>
+        </a>
+      </div>
+
+      <!-- Earrings (slider) -->
+      <div class="product">
+        <a href="earrings.html" class="product-link" aria-label="View Earrings">
+          <div class="product-image slider">
+            <button class="prev" aria-label="Previous">&#10094;</button>
+            <div class="slides">
+              <img src="./images/earrings.jpg" class="slide active" alt="Earrings 1">
+              <img src="./images/earrings2.jpg" class="slide" alt="Earrings 2">
+              <img src="./images/earrings3.jpg" class="slide" alt="Earrings 3">
+            </div>
+            <button class="next" aria-label="Next">&#10095;</button>
+          </div>
+          <span>Earrings</span>
+        </a>
+      </div>
+    </div>
+    
+    <section class="story">
+      <div class="story-text">
+        <h2>Our Story</h2>
+        <p>
+          We curate a collection of exquisite pieces,
+          from timeless classics to modern trends.
+        </p>
+      </div>
+
+      <div class="story-image">
+        <img src="./images/jewerlly.jpg" alt="Our atelier">
+      </div>
+    </section>
+
+  </div>
+
+  <script src="home.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
