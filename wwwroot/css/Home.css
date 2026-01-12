@@ -1,0 +1,366 @@
+﻿* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  background-color: #f8f5f1;
+  color: #1e1e1e;
+}
+
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.container {
+  width: 90%;
+  max-width: 1100px;
+  margin: auto;
+}
+
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 40px 0;
+}
+
+.hero-image {
+  
+  width: clamp(160px, 36vw, 360px);
+  height: clamp(120px, 28vw, 260px);
+  background: #e5e5e5;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+.hero-img{
+  width: 100%;
+  max-height: 320px;   
+  object-fit: cover;   
+  border-radius: 12px;
+}
+
+
+
+#order-popup-overlay .modal-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  color: #333;
+}
+@media (prefers-reduced-motion: no-preference){
+  #order-popup-overlay .modal-close:hover { transform: scale(1.05); }
+  #order-popup-overlay {
+    opacity: 0;
+    transition: opacity 260ms ease;
+    pointer-events: none;
+  }
+  #order-popup-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  #order-popup-overlay .modal-content {
+    transform: translateY(-10px) scale(0.98);
+    opacity: 0;
+    transition: transform 260ms ease, opacity 260ms ease;
+  }
+
+  #order-popup-overlay.open .modal-content {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+
+  #order-popup-overlay.closing { opacity: 0; }
+  #order-popup-overlay.closing .modal-content { transform: translateY(-8px) scale(0.98); opacity: 0; }
+}
+
+.hero-text {
+  text-align: center; 
+}
+
+.hero-text h1 {
+  font-size: clamp(20px, 3.2vw, 34px);
+  margin-bottom: 12px;
+}
+
+.hero-text p {
+  max-width: 720px;
+  margin: 0 auto;
+  color: #555;
+  line-height: 1.65; 
+  margin-top: 6px; 
+  margin-bottom: 12px; 
+}
+
+
+.product-image {
+  position: relative;
+  height: clamp(140px, 22vw, 220px);
+  background: #e5e5e5;
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.product-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.product-link:focus {
+  outline: 3px solid #c39a5b;
+  outline-offset: 4px;
+}
+
+.product-link .product-image {
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+
+.product-link:hover .product-image, .product-link:focus .product-image {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+}
+
+.product-image .slide {
+  position: absolute;
+  max-width: 85%;
+  max-height: 85%;
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.product-image .slide.active {
+  opacity: 1;
+}
+
+
+.product-image .prev, .product-image .next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.45);
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  cursor: pointer;
+  border-radius: 50%;
+  z-index: 10;
+}
+.product-image .prev { left: 8px; }
+.product-image .next { right: 8px; }
+
+.product-image .dots {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 8px;
+  display: flex;
+  gap: 6px;
+  z-index: 11;
+}
+
+.product-image .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.6);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.product-image .dot.active {
+  background: rgba(255,255,255,1);
+}
+
+ 
+
+
+
+.story-image {
+  overflow: hidden;
+  background: #e5e5e5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.story-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+.btn {
+  padding: 12px 28px;
+  background: #fff;
+  border: 1px solid #ddd;
+  cursor: pointer;
+}
+
+
+.section-title {
+  text-align: center;
+  font-size: 26px;
+  margin: 60px 0 30px;
+}
+
+
+.product {
+  text-align: center;
+  cursor: pointer;
+}
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 25px;
+}
+
+
+
+.story {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 70px 0;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.story-text {
+  background: #2f2f2f;
+  color: #fff;
+  padding: 50px;
+}
+
+.story-text h2 {
+  margin-bottom: 15px;
+}
+
+.story-text p {
+  color: #ddd;
+  line-height: 1.6;
+}
+
+
+
+
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .products {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .story {
+    grid-template-columns: 1fr;
+  }
+  }
+
+
+.slider {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  height: 360px;
+  background: #e5e5e5;
+  border-radius: 15px;
+  margin: 40px auto;
+  overflow: hidden;
+}
+
+.slider:not(.product-image) .slides {
+  width: 100%;
+  height: 100%;
+}
+
+.slider:not(.product-image) .slide {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: none;
+}
+
+.slider:not(.product-image) .slide.active {
+  display: block;
+}
+
+.slider:not(.product-image) .prev, .slider:not(.product-image) .next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.4);
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.slider:not(.product-image) .prev { left: 10px; z-index:11; }
+.slider:not(.product-image) .next { right: 10px; z-index:11; }
+
+.slider:not(.product-image) .dots {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 14px;
+  display: flex;
+  gap: 8px;
+  z-index: 12;
+}
+
+.slider:not(.product-image) .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.6);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.slider:not(.product-image) .dot.active {
+  background: rgba(255,255,255,1);
+  box-shadow: 0 0 0 3px rgba(0,0,0,0.08);
+}
+
+.slider:not(.product-image) .dot:focus { outline: none; }
+
+
+.hero-image .slider {
+  width: 100%;
+  height: 100%;
+}
+.hero-image .slider .slide { object-fit: cover; }
+
+

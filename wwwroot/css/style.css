@@ -1,0 +1,59 @@
+/* Global page styling for Order Confirmation */
+:root{
+  --accent:#b76e79;
+  --muted:#777;
+  --bg:#fff;
+}
+body{font-family:Segoe UI, Tahoma, Arial, sans-serif;background:var(--bg);color:#222;margin:0}
+.container{max-width:980px;margin:40px auto;padding:20px}
+.title{text-align:center;font-size:1.6rem;margin-bottom:18px}
+.hero{display:flex;justify-content:center;align-items:center;margin-bottom:18px}
+
+/* Heart-shaped image using mask */
+.heart{
+  width:clamp(100px,18vw,160px);
+  height:clamp(90px,16vw,140px);
+  background-image:url("./images/order%20box.jpg");
+  background-size:cover;background-position:center;
+  -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 90'><path d='M50 86s-38-24-38-50C12 6 36 6 44 18c4 6 6 6 6 6s2 0 6-6c8-12 32-12 32 18 0 26-38 50-38 50z' fill='black'/></svg>");
+  mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 90'><path d='M50 86s-38-24-38-50C12 6 36 6 44 18c4 6 6 6 6 6s2 0 6-6c8-12 32-12 32 18 0 26-38 50-38 50z' fill='black'/></svg>");
+  -webkit-mask-size:contain;mask-size:contain;
+  -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+  -webkit-mask-position:center;mask-position:center;
+  box-shadow:0 8px 18px rgba(0,0,0,0.12);
+}
+.visually-hidden{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap}
+
+.confirmed{text-align:center;font-weight:600;margin:8px 0}
+.order-number,.email{text-align:center;margin:6px 0;color:var(--muted)}
+
+/* Table styles */
+.table-wrap{overflow:auto;margin-top:18px}
+.order-table{width:100%;border-collapse:collapse;background:#fff}
+.order-table thead th{background:#fafafa;padding:12px;text-align:left;border-bottom:1px solid #eee}
+.order-table tbody td{padding:12px;border-bottom:1px solid #f2f2f2;vertical-align:middle}
+.order-table input.qty{width:64px;padding:6px;border-radius:6px;border:1px solid #ddd}
+.order-table .actions button{margin-right:6px;padding:6px 8px;border:1px solid #ddd;background:#fff;border-radius:6px;cursor:pointer}
+.order-table .actions button:hover{background:#f6f6f6}
+.total-row td{background:#fafafa;padding:12px;font-size:1.05rem}
+
+.order-controls{display:flex;gap:10px;justify-content:flex-end;margin-top:12px}
+.order-controls button{padding:10px 14px;border-radius:8px;border:none;background:var(--accent);color:#fff;cursor:pointer}
+.order-controls #save-changes{background:#6c8a8f}
+.order-controls #order-again{background:var(--accent)}
+
+/* Responsive: stack table rows on very small screens */
+@media (max-width:560px){
+  .order-table thead{display:none}
+  .order-table tbody td{display:block;padding:10px}
+  .order-table tbody tr{margin-bottom:12px;display:block;border:1px solid #eee;border-radius:8px;overflow:hidden}
+  .order-table tbody td:nth-child(1){font-weight:600}
+  .order-controls{justify-content:center}
+
+  img{
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+}

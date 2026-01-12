@@ -130,7 +130,7 @@ document.getElementById("checkoutForm").addEventListener("submit", async functio
         localStorage.removeItem("cart");
         
         // Ridrejto në faqen e konfirmimit me orderId
-        window.location.href = `order-confirmation.html?orderId=${orderId}`;
+        window.location.href = `OrderConfirmationn.html?orderId=${orderId}`;
     } catch (err) {
         console.error("Gabim me backend gjatë checkout", err);
         let errorMessage = "Gabim gjatë përfundimit të porosisë.";
