@@ -73,5 +73,12 @@ namespace JewelerySolution.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
+        public IActionResult Test()
+        {
+            var count = _context.Products.Count();
+            return Content(count.ToString());
+        }
+
     }
 }

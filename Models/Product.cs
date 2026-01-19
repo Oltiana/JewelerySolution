@@ -1,5 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using JewelerySolution.Models;
+﻿using JewelerySolution.Models;
+using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Http;
+
 
 namespace JewelerySolution.Models
 {
@@ -11,6 +14,9 @@ namespace JewelerySolution.Models
         public decimal Price { get; set; }
         public int Stock { get; set; }
         public required string ImageUrl { get; set; }
+
+        [NotMapped] // ⭐ shumë e rëndësishme
+        public IFormFile? ImageFile { get; set; }
 
         public int CategoryId { get; set; }
         public required Category Category { get; set; }

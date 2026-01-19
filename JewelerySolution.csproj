@@ -7,13 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Views\NewFolder\**" />
-    <Content Remove="Views\NewFolder\**" />
-    <EmbeddedResource Remove="Views\NewFolder\**" />
-    <None Remove="Views\NewFolder\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Remove="Controllers\AdminOrderController.cs" />
     <Compile Remove="Controllers\CartControlle.cs" />
     <Compile Remove="Controllers\CustomerOrderController.cs" />

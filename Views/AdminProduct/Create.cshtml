@@ -1,0 +1,37 @@
+﻿@model JewelerySolution.Models.Product
+
+<h2>Add Product</h2>
+
+<form asp-action="Create" method="post" enctype="multipart/form-data">
+
+    <div class="mb-3">
+        <label>Name</label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Price</label>
+        <input asp-for="Price" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Stock</label>
+        <input asp-for="Stock" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Category</label>
+        <select asp-for="CategoryId"
+                asp-items="@(new SelectList(ViewBag.Categories, "Id", "Name"))"
+                class="form-control">
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label>Image</label>
+        <input asp-for="ImageFile" type="file" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-success">Save</button>
+
+</form>
