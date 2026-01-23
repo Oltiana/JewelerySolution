@@ -1,25 +1,35 @@
-// Lista e vathëve
-/*const earrings = [
-    { name: "Pearl Drop", price: 220, stock: 15, image: "images/41bc8579016491dfd017a40a7a112ea3.jpg" },
-    { name: "Bold Muse", price: 780, stock: 6, image: "images/a49aa8f5f44e8d0fe491a0b528d3d4fa.jpg" },
-    { name: "Flora", price: 120, stock: 0, image: "images/3ce062b5a0a7057447977a66d1d73d0b.jpg" },
-    { name: "Celeste Pearl", price: 300, stock: 8, image: "images/1786769b3ad735e40ebdf0d9aca671ec.jpg" }
-];*/
-
+const container = document.getElementById("earringsContainer");
 const category = "Earrings";
 
-fetch("/api/products")
-    .then(r => r.json())
-    .then(data => {
-        const filtered = data.filter(p => p.category?.name === category);
+fetch(`/api/products/category/${category}`)
+    .then(res => res.json())
+    .then(products => {
+        container.innerHTML = "";
 
-        filtered.forEach(p => {
-            products.innerHTML += `
-        <div class="product">
-          <img src="/images/${p.imageUrl}">
-          <h4>${p.name}</h4>
-          <p>€${p.price}</p>
-        </div>
-      `;
+        if (products.length === 0) {
+            container.innerHTML = "<p>No earrings found.</p>";
+            return;
+        }
+
+        products.forEach(p => {
+            container.innerHTML += `
+                <div class="col-md-4 col-lg-3">
+                    <div class="card ring-card">
+                        <img src="${p.imageUrl}" class="card-img-top" alt="${p.name}">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">${p.name}</h5>
+                            <p class="price">€${p.price}</p>
+                            <p class="stock">Stock: ${p.stock}</p>
+                            <button class="add-btn" ${p.stock === 0 ? "disabled" : ""}>
+                                Add to cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
         });
+    })
+    .catch(err => {
+        console.error(err);
+        container.innerHTML = "<p>Error loading products</p>";
     });

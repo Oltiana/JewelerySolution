@@ -1,24 +1,35 @@
-
-/*const rings = [
-    { name: "Rosé Dream", price: 350, stock: 20, image: "images/image_2025-06-28_23-16-53-273.jpg" },
-    { name: "Pure Heart", price: 950, stock: 10, image: "images/image_2025-06-28_23-16-53-545.jpg" },
-    { name: "Golden Whisper", price: 180, stock: 4, image: "images/image_2025-06-28_23-21-24-974.jpg" },
-    { name: "Royal Marquise", price: 180, stock: 0, image: "images/f1182b5df995d2cb0cc81d59eb2cb55f.jpg" }
-];*/
+const container = document.getElementById("ringsContainer");
 const category = "Rings";
 
-fetch("/api/products")
-    .then(r => r.json())
-    .then(data => {
-        const filtered = data.filter(p => p.category?.name === category);
+fetch(`/api/products/category/${category}`)
+    .then(res => res.json())
+    .then(products => {
+        container.innerHTML = "";
 
-        filtered.forEach(p => {
-            products.innerHTML += `
-        <div class="product">
-          <img src="/images/${p.imageUrl}">
-          <h4>${p.name}</h4>
-          <p>€${p.price}</p>
-        </div>
-      `;
+        if (products.length === 0) {
+            container.innerHTML = "<p>No products found.</p>";
+            return;
+        }
+
+        products.forEach(p => {
+            container.innerHTML += `
+                <div class="col-md-4 col-lg-3">
+                    <div class="card ring-card">
+                        <img src="${p.imageUrl}" class="card-img-top" alt="${p.name}">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">${p.name}</h5>
+                            <p class="price">€${p.price}</p>
+                            <p class="stock">Stock: ${p.stock}</p>
+                            <button class="add-btn" ${p.stock === 0 ? "disabled" : ""}>
+                                Add to cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
         });
+    })
+    .catch(err => {
+        console.error(err);
+        container.innerHTML = "<p>Error loading products</p>";
     });
