@@ -10,17 +10,12 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/product.css">
-
+    
     <!-- Optional: Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="#">💎 Jewelry Store</a>
-        </div>
-    </nav>
+    <div id="navbar"></div>
 
     <div class="hero-banner text-center mb-5">
         <h2>Discover Your Perfect Jewelry</h2>
@@ -56,21 +51,28 @@
 
             categories.forEach(c => {
                 container.innerHTML += `
-          <div class="col-md-4">
-            <a href="${c.link}" class="category-link d-block text-decoration-none text-center">
-              <div class="category-card">
-                <img src="${c.image}" alt="${c.name}">
-                <p>${c.name}</p>
-                <p class="description">${c.description}</p>
-                <button class="btn">See More</button>
-              </div>
-            </a>
-          </div>
-        `;
+                      <div class="col-md-4">
+                        <a href="${c.link}" class="category-link d-block text-decoration-none text-center">
+                          <div class="category-card">
+                            <img src="${c.image}" alt="${c.name}">
+                            <p>${c.name}</p>
+                            <p class="description">${c.description}</p>
+                            <button class="btn">See More</button>
+                          </div>
+                        </a>
+                      </div>
+                    `;
             });
         }
 
         displayCategories();
+
+        fetch('navbar.html')
+            .then(res => res.text())
+            .then(data => {
+                document.getElementById('navbar').innerHTML = data;
+            })
+            .catch(err => console.error(err));
     </script>
 
     <footer>

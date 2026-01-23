@@ -16,12 +16,7 @@
 </head>
 <body>
 
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
-            <a class="navbar-brand" href="#">💎 Jewelry Store</a>
-        </div>
-    </nav>
+    <div id="navbar"></div>
 
     <h1 class="text-center my-4">Necklaces</h1>
 
@@ -33,7 +28,12 @@
         © 2025 Jewelry Store
     </footer>
 
-
+    <script>fetch('navbar.html')
+            .then(res => res.text())
+            .then(data => {
+                document.getElementById('navbar').innerHTML = data;
+            })
+            .catch(err => console.error(err));</script>
     <script src="js/necklaces.js"></script>
 
 </body>

@@ -28,6 +28,9 @@ fetch(`/api/products/category/${category}`)
                 </div>
             `;
         });
+
+
+
     })
     .catch(err => {
         console.error(err);
