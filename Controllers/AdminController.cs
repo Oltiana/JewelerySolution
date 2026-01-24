@@ -1,12 +1,10 @@
 using JewelerySolution.Data;
 using JewelerySolution.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace JewelerySolution.Controllers
 {
-    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private readonly JeweleryDbContext _context;
