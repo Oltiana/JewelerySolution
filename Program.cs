@@ -80,13 +80,9 @@ builder.Services.AddAuthentication(options =>
             }
             return Task.CompletedTask;
         },
-        OnChallenge = context =>
+        OnForbidden = context =>
         {
-            // Prevent default 401 page
-            context.HandleResponse();
-
-            // Redirect to home page when not authorized
-            context.Response.Redirect("/products.html");
+            context.Response.Redirect("/home.html");
             return Task.CompletedTask;
         }
     };
