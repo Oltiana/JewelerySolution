@@ -63,10 +63,8 @@ namespace JewelerySolution.Controllers
 
             Response.Cookies.Append("access_token", token, new CookieOptions
             {
-                HttpOnly = false,   // JS can read it, dev only
-                Secure = false,     // allow HTTP for localhost
-                // HttpOnly = true, // prod only
-                // Secure = true, // prod only
+                HttpOnly = true,
+                Secure = true,
                 SameSite = SameSiteMode.Strict,
                 Expires = DateTimeOffset.UtcNow.AddHours(1)
             });
