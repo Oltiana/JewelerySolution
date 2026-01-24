@@ -1,6 +1,13 @@
 const loginForm = document.getElementById("loginForm");
 const errorMsg = document.getElementById("errorMsg");
 
+(async () => {
+   const user = await getUser();
+   if (user?.isAuthenticated) {
+   window.location.href = '/home.html';
+   }
+})();
+
 loginForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
@@ -34,14 +41,20 @@ loginForm.addEventListener("submit", function (e) {
     .then(async response => {
         if (response.ok) {
             const data = await response.json();
-            alert("Login successful!");
+            
+        const user = await getUser();
             
             // Ruajmë të dhënat në localStorage (Pika 19)
             localStorage.setItem("userRole", data.role);
             localStorage.setItem("userName", data.firstName);
             
-            // Drejtimi te faqja e produkteve
-            window.location.href = "products.html"; 
+            // Drejtimi te faqja
+            if (user.role === 'Admin') {
+             window.location.href = "/Admin"; 
+            } else {
+             window.location.href = "/home.html"; 
+            }
+            
         } else {
             // Shfaqim vetëm mesazhin e thjeshtë në anglisht
             errorMsg.textContent = "Invalid email or password. Please try again.";

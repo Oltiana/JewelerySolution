@@ -156,6 +156,29 @@ namespace JewelerySolution.Controllers
 
             return Redirect("/login.html"); 
         }
+
+        [HttpGet("me")]
+        public IActionResult Me()
+        {
+            var token = Request.Cookies["access_token"];
+            if (string.IsNullOrEmpty(token))
+                return Unauthorized();
+
+            var handler = new JwtSecurityTokenHandler();
+            var jwt = handler.ReadJwtToken(token);
+
+            var email = jwt.Claims.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.Sub)?.Value;
+            var role = jwt.Claims.FirstOrDefault(c => c.Type == "role")?.Value
+                       ?? jwt.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
+
+            return Ok(new
+            {
+                email,
+                role,
+                isAuthenticated = true
+            });
+        }
+
     }
     public class LoginRequest
     {
