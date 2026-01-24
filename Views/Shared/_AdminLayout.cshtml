@@ -46,7 +46,9 @@
         <h5 class="brand mb-0">Olore Jewelry Store</h5>
         <div>
             <a class="me-3 text-decoration-none text-muted" asp-controller="Home" asp-action="Index">Dashboard</a>
-            <a class="text-decoration-none text-muted" asp-controller="Account" asp-action="Logout">Logout</a>
+			<form action="/api/auth/logout" method="post" class="d-inline">
+				<button type="submit" class="btn btn-link text-muted p-0">Logout</button>
+			</form>
         </div>
     </div>
 
