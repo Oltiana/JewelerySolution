@@ -6,8 +6,12 @@ using System.Security.Claims;
 using System.Text;
 
 
+using JewelerySolution.Data;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
 
 // Add services to the container
 builder.Services.AddControllersWithViews()
