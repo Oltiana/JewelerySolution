@@ -5,17 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jewellery Shop</title>
   <link rel="stylesheet" href="home.css" />
-
 </head>
-<body>
 
+<body>
   <div class="container">
 
-   
     <section class="hero">
       <div class="hero-image">
-        <!-- static hero image (slider removed from hero) -->
-        <img src="./images/jewerlly.jpg" alt="Jewellery shop hero">
+        <img class="hero-img" src="./images/jewerlly.jpg" alt="Jewellery shop hero">
       </div>
 
       <div class="hero-text">
@@ -25,65 +22,71 @@
       </div>
     </section>
 
-    <!-- Demo button removed -->
-
-<!-- standalone slider removed (now inside hero) -->
-
-
-
-   
     <h2 class="section-title">Our Most Loved Pieces</h2>
 
     <div class="products">
-      <!-- Rings (slider) -->
-      <div class="product">
-        <a href="rings.html" class="product-link" aria-label="View Rings">
-          <div class="product-image slider">
-            <button class="prev" aria-label="Previous">&#10094;</button>
-            <div class="slides">
-              <img src="./images/rings.jpg" class="slide active" alt="Rings 1">
-              <img src="./images/rings2.jpg" class="slide" alt="Rings 2">
-              <img src="./images/rings3.jpg" class="slide" alt="Rings 3">
-            </div>
-            <button class="next" aria-label="Next">&#10095;</button>
-          </div>
-          <span>Rings</span>
-        </a>
-      </div>
 
-      <!-- Necklaces (slider) -->
-      <div class="product">
-        <a href="necklaces.html" class="product-link" aria-label="View Necklaces">
-          <div class="product-image slider">
-            <button class="prev" aria-label="Previous">&#10094;</button>
-            <div class="slides">
-              <img src="./images/necklace.jpg" class="slide active" alt="Necklaces 1">
-              <img src="./images/necklasce2.jpg" class="slide" alt="Necklaces 2">
-              <img src="./images/necklace3.jpg" class="slide" alt="Necklaces 3">
-            </div>
-            <button class="next" aria-label="Next">&#10095;</button>
-          </div>
-          <span>Necklaces</span>
-        </a>
-      </div>
+    <div class="product">
+    <a asp-controller="Home"
+       asp-action="Rings"
+       class="product-link"
+       aria-label="View Rings">
 
-      <!-- Earrings (slider) -->
+        <div class="product-image slider">
+            <img src="~/images/rings.jpg"  class="slide active" alt="Rings 1">
+            <img src="~/images/rings2.jpg" class="slide" alt="Rings 2">
+            <img src="~/images/rings3.jpg" class="slide" alt="Rings 3">
+            <!-- dots krijohen AUTOMATIKISHT nga JS -->
+        </div>
+
+        <p>Rings</p>
+    </a>
+</div>
+
+
+        <p>Rings</p>
+    </a>
+</div>
+
+
+      
       <div class="product">
-        <a href="earrings.html" class="product-link" aria-label="View Earrings">
-          <div class="product-image slider">
-            <button class="prev" aria-label="Previous">&#10094;</button>
-            <div class="slides">
-              <img src="./images/earrings.jpg" class="slide active" alt="Earrings 1">
-              <img src="./images/earrings2.jpg" class="slide" alt="Earrings 2">
-              <img src="./images/earrings3.jpg" class="slide" alt="Earrings 3">
-            </div>
-            <button class="next" aria-label="Next">&#10095;</button>
-          </div>
-          <span>Earrings</span>
-        </a>
-      </div>
+    <a asp-controller="Home"
+       asp-action="Necklaces"
+       class="product-link"
+       aria-label="View Necklaces">
+
+        <div class="product-image slider">
+            <img src="~/images/necklace.jpg"  class="slide active" alt="Necklaces 1">
+            <img src="~/images/necklace2.jpg" class="slide" alt="Necklaces 2">
+            <img src="~/images/necklace3.jpg" class="slide" alt="Necklaces 3">
+        </div>
+
+        <span class="label">Necklaces</span>
+    </a>
+</div>
+
+
+      
+      <div class="product">
+    <a asp-controller="Home"
+       asp-action="Earrings"
+       class="product-link"
+       aria-label="View Earrings">
+
+        <div class="product-image slider">
+            <img src="~/images/earrings.jpg"  class="slide active" alt="Earrings 1">
+            <img src="~/images/earrings2.jpg" class="slide" alt="Earrings 2">
+            <img src="~/images/earrings3.jpg" class="slide" alt="Earrings 3">
+        </div>
+
+        <span class="label">Earrings</span>
+    </a>
+</div>
+
+
     </div>
-    
+
     <section class="story">
       <div class="story-text">
         <h2>Our Story</h2>
