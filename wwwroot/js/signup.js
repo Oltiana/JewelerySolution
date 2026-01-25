@@ -31,7 +31,7 @@ signupForm.addEventListener("submit", function (e) {
   }
 
   // Të dhënat që do të dërgohen në API
-  // Vini re: 'Role' nuk dërgohet këtu sepse Backend-i e vendos automatikisht "User"
+
   const signupData = {
     firstName: firstName,
     lastName: lastName,
