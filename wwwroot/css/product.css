@@ -1,4 +1,4 @@
-﻿
+
 body {
     background-color: #f9f7f3;
     font-family: serif;
@@ -13,6 +13,17 @@ h1 {
 
 .navbar {
     border-bottom: 1px solid #e5e5e5;
+}
+
+.hero-banner {
+    margin-top: 20px;
+    margin-bottom: 30px;
+    padding: 0;
+}
+
+.hero-banner h2 {
+    margin: 0;
+    padding: 0;
 }
 
 .category-card {

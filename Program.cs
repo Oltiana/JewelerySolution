@@ -1,5 +1,10 @@
 using JewelerySolution.Data;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
+using System.Text;
+
 
 using JewelerySolution.Data;
 using Microsoft.EntityFrameworkCore;
@@ -43,7 +48,52 @@ builder.Services.AddDbContext<JeweleryDbContext>(options =>
     )
 );
 
+
+// JWT secret key (store securely!)
+var jwtKey = builder.Configuration["Jwt:Key"] ?? "LONG_KEY_SECRET_KEY_AUTH_SECRET_JEWELERY!";
+var jwtIssuer = builder.Configuration["Jwt:Issuer"] ?? "JeweleryAPI";
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = jwtIssuer,
+        ValidAudience = jwtIssuer,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey)),
+        ClockSkew = TimeSpan.Zero,
+        RoleClaimType = ClaimTypes.Role
+    };
+
+    options.Events = new JwtBearerEvents
+    {
+        OnMessageReceived = context =>
+        {
+            // Read token from cookie for Razor / browser requests
+            if (context.Request.Cookies.ContainsKey("access_token"))
+            {
+                context.Token = context.Request.Cookies["access_token"];
+            }
+            return Task.CompletedTask;
+        },
+        OnForbidden = context =>
+        {
+            context.Response.Redirect("/home.html");
+            return Task.CompletedTask;
+        }
+    };
+});
+
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline
 if (!app.Environment.IsDevelopment())
@@ -51,6 +101,14 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
+
+app.Use(async (context, next) =>
+{
+    context.Response.Headers["Cache-Control"] = "no-cache, no-store, must-revalidate";
+    context.Response.Headers["Pragma"] = "no-cache";
+    context.Response.Headers["Expires"] = "0";
+    await next();
+});
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
@@ -61,6 +119,7 @@ app.UseCors(); // Enable CORS
 
 app.UseSession(); // Enable session middleware
 
+app.UseAuthentication(); // add before Authorization
 app.UseAuthorization();
 
 app.MapControllers(); // Map API controllers

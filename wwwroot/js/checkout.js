@@ -125,6 +125,22 @@ document.getElementById("checkoutForm").addEventListener("submit", async functio
         const data = await res.json();
         const orderId = data.orderId || '';
 
+        // Ruaj porosinë në localStorage për navbar
+        const userOrder = {
+            id: orderId || Date.now().toString(),
+            orderId: orderId || Date.now().toString(),
+            items: cartForBackend,
+            total: totalValue,
+            status: "Pending",
+            date: order.deliveryDate,
+            paymentMethod: paymentMethod,
+            fullName: order.fullName,
+            address: order.address
+        };
+        const existingOrders = JSON.parse(localStorage.getItem("userOrders")) || [];
+        existingOrders.push(userOrder);
+        localStorage.setItem("userOrders", JSON.stringify(existingOrders));
+
         // pastro cart lokalisht dhe ridrejto në faqen e konfirmimit
         cart = [];
         localStorage.removeItem("cart");

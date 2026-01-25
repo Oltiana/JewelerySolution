@@ -7,7 +7,7 @@ namespace JewelerySolution.Data
     {
         public static async Task SeedAdminUser(JeweleryDbContext context)
         {
-            // Kontrollojmë nëse ekziston një përdorues me këtë email
+            // Kontrollojmï¿½ nï¿½se ekziston njï¿½ pï¿½rdorues me kï¿½tï¿½ email
             var adminEmail = "admin@jewelery.com";
             var adminExists = await context.Users.AnyAsync(u => u.Email == adminEmail);
 
@@ -18,8 +18,8 @@ namespace JewelerySolution.Data
                     FirstName = "Admin",
                     LastName = "System",
                     Email = adminEmail,
-                    PasswordHash = "Admin123", // Mund ta ndryshosh si të duash
-                    Role = "Admin" // Ky është hapi kryesor (Pika 19)
+                    PasswordHash = "Admin123", // Mund ta ndryshosh si tï¿½ duash
+                    Role = "Admin" // Ky ï¿½shtï¿½ hapi kryesor (Pika 19)
                 };
 
                 context.Users.Add(adminUser);
