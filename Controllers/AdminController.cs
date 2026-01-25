@@ -1,7 +1,7 @@
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using JewelerySolution.Data;
 using JewelerySolution.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace JewelerySolution.Controllers
 {
@@ -19,19 +19,18 @@ namespace JewelerySolution.Controllers
         {
             try
             {
-                // Optimizim: Përdorim AsNoTracking dhe limit për performancë më të mirë
+                // Optimizoj query-në duke përdorur projection direkt dhe duke kufizuar numrin e porosive
                 var orderDtos = await _context.Orders
-                    .AsNoTracking() // Shmang tracking-in për performancë më të mirë
-                    .Include(o => o.OrderItems)
+                    .AsNoTracking()
                     .OrderByDescending(o => o.Id)
-                    .Take(100) // Limit në 100 porosi për performancë
+                    .Take(50) // Zvogëloj nga 100 në 50 për performancë më të mirë
                     .Select(o => new OrderDto
                     {
                         Id = o.Id,
                         CustomerName = o.CustomerName ?? string.Empty,
                         Status = o.Status ?? "Pending",
                         TotalPrice = o.TotalPrice,
-                        OrderItems = o.OrderItems != null 
+                        OrderItems = o.OrderItems != null && o.OrderItems.Any()
                             ? o.OrderItems.Select(oi => new OrderItemDto
                             {
                                 ProductName = oi.ProductName ?? string.Empty,
@@ -45,7 +44,10 @@ namespace JewelerySolution.Controllers
             }
             catch (Exception ex)
             {
-                // Në rast gabimi, kthe një listë bosh
+                // Log error dhe kthe listë bosh
+                // Në production, përdor ILogger për logging
+                System.Diagnostics.Debug.WriteLine($"Error loading orders: {ex.Message}");
+                System.Diagnostics.Debug.WriteLine($"Stack trace: {ex.StackTrace}");
                 return View(new List<OrderDto>());
             }
         }
@@ -73,5 +75,12 @@ namespace JewelerySolution.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
+        public IActionResult Test()
+        {
+            var count = _context.Products.Count();
+            return Content(count.ToString());
+        }
+
     }
 }

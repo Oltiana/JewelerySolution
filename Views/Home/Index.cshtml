@@ -77,10 +77,9 @@
         <div class="col-md-2 sidebar p-3">
             <nav class="nav flex-column gap-2">
                 <a class="nav-link active" asp-controller="Home" asp-action="Index">Dashboard</a>
-                <a class="nav-link" href="/Admin/Products">Products</a>
+                <a class="nav-link" asp-controller="AdminProduct" asp-action="Index">Products</a>
                 <a class="nav-link" asp-controller="Admin" asp-action="Index">Orders</a>
-
-                <a class="nav-link" href="/Admin/Users">Users</a>
+                <a class="nav-link" asp-controller="User" asp-action="Index">Users</a>
             </nav>
         </div>
 

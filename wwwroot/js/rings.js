@@ -1,63 +1,77 @@
+document.addEventListener('DOMContentLoaded', function() {
+    const container = document.getElementById("ringsContainer");
+    if (!container) {
+        console.error("ringsContainer not found");
+        return;
+    }
 
-/*const rings = [
-    { name: "Rosé Dream", price: 350, stock: 20, image: "images/image_2025-06-28_23-16-53-273.jpg" },
-    { name: "Pure Heart", price: 950, stock: 10, image: "images/image_2025-06-28_23-16-53-545.jpg" },
-    { name: "Golden Whisper", price: 180, stock: 4, image: "images/image_2025-06-28_23-21-24-974.jpg" },
-    { name: "Royal Marquise", price: 180, stock: 0, image: "images/f1182b5df995d2cb0cc81d59eb2cb55f.jpg" }
-];*/
+    const category = "Rings";
 
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    fetch(`/api/products/category/${category}`)
+        .then(res => res.json())
+        .then(products => {
+            container.innerHTML = "";
 
-function displayProducts(data, containerId) {
-    const container = document.getElementById(containerId);
-    container.innerHTML = "";
-
-    data.forEach(item => {
-        container.innerHTML += `
-      <div class="col-sm-6 col-lg-4 mb-4">
-        <div class="card ring-card">
-          <img src="${item.imageUrl}" class="card-img-top" alt="${item.name}">
-          <div class="card-body text-center">
-            <h5 class="card-title">${item.name}</h5>
-            <p class="price">€${item.price}</p>
-            <p class="stock text-muted">Në stok: ${item.stock}</p>
-            <button class="btn add-btn addCartBtn"
-                data-name="${item.name}"
-                data-price="${item.price}"
-                data-image="${item.imageUrl}"
-                ${item.stock === 0 ? 'disabled' : ''}>
-                ${item.stock === 0 ? 'Nuk ka stok' : 'Shto në Shportë'}
-            </button>
-          </div>
-        </div>
-      </div>
-    `;
-    });
-
-    document.querySelectorAll(".addCartBtn").forEach(btn => {
-        btn.addEventListener("click", () => {
-            const index = cart.findIndex(x => x.name === btn.dataset.name);
-
-            if (index > -1) {
-                cart[index].qty += 1;
-            } else {
-                cart.push({
-                    name: btn.dataset.name,
-                    price: parseFloat(btn.dataset.price),
-                    image: btn.dataset.image,
-                    qty: 1
-                });
+            if (products.length === 0) {
+                container.innerHTML = "<p>No products found.</p>";
+                return;
             }
 
-            localStorage.setItem("cart", JSON.stringify(cart));
-            alert(`${btn.dataset.name} u shtua në shportë!`);
+            products.forEach((p, index) => {
+                container.innerHTML += `
+                    <div class="col-md-4 col-lg-3">
+                        <div class="card ring-card">
+                            <img src="${p.imageUrl}" class="card-img-top" alt="${p.name}">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">${p.name}</h5>
+                                <p class="price">€${p.price}</p>
+                                <p class="stock">Stock: ${p.stock}</p>
+                                <button class="add-btn" ${p.stock === 0 ? "disabled" : ""} onclick="addProductToCart(${p.id}, '${p.name}', ${p.price}, '${p.imageUrl}')">
+                                    Add to cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        })
+        .catch(err => {
+            console.error(err);
+            container.innerHTML = "<p>Error loading products</p>";
         });
-    });
+});
+
+// Funksioni për të shtuar produkt në shportë
+function addProductToCart(id, name, price, imageUrl) {
+    // Merr shportën aktuale nga localStorage
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    
+    // Kontrollo nëse produkti ekziston tashmë në shportë
+    const existingItem = cart.findIndex(x => x.name === name);
+    if (existingItem > -1) {
+        // Nëse produkti ekziston, rrit sasinë
+        cart[existingItem].qty += 1;
+    } else {
+        // Shto produkt të ri
+        cart.push({
+            id: id,
+            name: name,
+            price: price,
+            image: imageUrl,
+            qty: 1
+        });
+    }
+    
+    // Ruaj shportën në localStorage
+    localStorage.setItem("cart", JSON.stringify(cart));
+    
+    // Përditëso badge në navbar
+    const cartBadge = document.getElementById("cartBadge");
+    if (cartBadge) {
+        const totalItems = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
+        cartBadge.textContent = totalItems;
+    }
+    
+    // Shfaq mesazh konfirmimi
+    alert(`${name} u shtua në shportë!`);
 }
-
-// Fetch produktet nga API për Rings
-fetch('/api/Products/category/Rings')
-    .then(res => res.json())
-    .then(data => displayProducts(data, 'ringsContainer'))
-    .catch(err => console.error(err));
-
