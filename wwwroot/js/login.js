@@ -19,11 +19,10 @@ loginForm.addEventListener("submit", function (e) {
     errorMsg.textContent = "";
     errorMsg.style.color = "red";
 
-    // Objekti me fushat boshtë për të kënaqur validimin e serverit (Pika 17 & 19)
     const loginData = {
         Email: emailValue,
         PasswordHash: passwordValue,
-        firstName: "", // Mbajmë këto që të mos dalë error-i i kuq
+        firstName: "", 
         lastName: "",
         role: ""
     };
@@ -44,11 +43,11 @@ loginForm.addEventListener("submit", function (e) {
             
         const user = await getUser();
             
-            // Ruajmë të dhënat në localStorage (Pika 19)
+
             localStorage.setItem("userRole", data.role);
             localStorage.setItem("userName", data.firstName);
             
-            // Drejtimi te faqja
+
             if (user.role === 'Admin') {
              window.location.href = "/Admin"; 
             } else {
@@ -56,7 +55,7 @@ loginForm.addEventListener("submit", function (e) {
             }
             
         } else {
-            // Shfaqim vetëm mesazhin e thjeshtë në anglisht
+
             errorMsg.textContent = "Invalid email or password. Please try again.";
         }
     })
