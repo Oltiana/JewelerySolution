@@ -3,6 +3,7 @@
             .then(response => response.text())
             .then(async (html) => {
                 document.getElementById('header-container').innerHTML = html;
+                if (typeof updateCartBadge === 'function') updateCartBadge();
 
         const user = await getUser();
         console.log('user', user);

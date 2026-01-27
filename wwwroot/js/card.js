@@ -9,6 +9,17 @@ let cart = []; // marrim nga localStorage
 function loadCart() {
     cart = JSON.parse(localStorage.getItem("cart")) || [];
     renderCart();
+    updateCartBadge();
+}
+
+// Përditëson badge-in e shportës në navbar (për faqen card.html)
+function updateCartBadge() {
+    const cartBadge = document.getElementById("cartBadge");
+    if (cartBadge) {
+        const totalItems = (cart || []).reduce((sum, item) => sum + (item.qty || 1), 0);
+        cartBadge.textContent = totalItems;
+        cartBadge.style.display = totalItems === 0 ? "none" : "block";
+    }
 }
 
 function addToCart(item) {
@@ -54,37 +65,33 @@ function renderCart() {
     cart.forEach((item, index) => {
         // Përdor property names nga localStorage
         const itemName = item.name || '';
-        const itemPrice = item.price || 0;
-        const itemImage = item.image || '';
+        const itemPrice = parseFloat(item.price) || 0;
+        const itemImage = item.imageUrl || item.image || '';
         const itemQty = item.qty || 1;
         
         const total = itemPrice * itemQty;
         subtotal += total;
 
         container.innerHTML += `
-            <div class="card p-3 mb-3">
-                <div class="row align-items-center">
-                    <div class="col-6 d-flex gap-3">
-                        <img src="${itemImage}" width="70" height="70" style="object-fit:cover">
-                        <div>
-                            <b>${itemName}</b><br>
+            <div class="card p-3 mb-3 cart-item-card">
+                <div class="row align-items-center g-2">
+                    <div class="col-12 col-md-6 d-flex gap-3 align-items-center">
+                        <img src="${itemImage}" alt="${itemName}" width="70" height="70" class="cart-item-img" style="object-fit:cover; flex-shrink:0">
+                        <div class="min-w-0">
+                            <b class="d-block text-truncate">${itemName}</b>
                             <small>${itemPrice.toFixed(2)} €</small>
                         </div>
                     </div>
-
-                    <div class="col-3 d-flex align-items-center gap-2">
-                        <button class="btn btn-sm btn-outline-secondary" onclick="changeQty(${index}, -1)">-</button>
-                        <span>${itemQty}</span>
-                        <button class="btn btn-sm btn-outline-secondary" onclick="changeQty(${index}, 1)">+</button>
+                    <div class="col-6 col-md-3 d-flex align-items-center gap-2">
+                        <button type="button" class="btn btn-sm btn-outline-secondary" onclick="changeQty(${index}, -1)">−</button>
+                        <span class="cart-qty">${itemQty}</span>
+                        <button type="button" class="btn btn-sm btn-outline-secondary" onclick="changeQty(${index}, 1)">+</button>
                     </div>
-
-                    <div class="col-2 fw-bold">
-                        ${total.toFixed(2)} € 
+                    <div class="col-4 col-md-2 fw-bold text-nowrap">
+                        ${total.toFixed(2)} €
                     </div>
-
-                    <div class="col-1 text-end">
-                        <i class="bi bi-trash text-danger" style="cursor:pointer"
-                           onclick="removeItem(${index})"></i>
+                    <div class="col-2 col-md-1 text-end">
+                        <i class="bi bi-trash text-danger" style="cursor:pointer" onclick="removeItem(${index})" title="Hiq"></i>
                     </div>
                 </div>
             </div>

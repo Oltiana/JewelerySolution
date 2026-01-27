@@ -20,6 +20,30 @@ body {
     padding: 0;
 }
 
+/* Home, About, Products në mes të faqes (qendër e vërtetë); Shporta + Login/Profil në të djathtë */
+.navbar-flex {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    position: relative;
+}
+.navbar-center-wrap {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+}
+.navbar-center-wrap .navbar-nav {
+    margin: 0;
+}
+.navbar-end-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
 
 .cart-badge {
     position: absolute;
