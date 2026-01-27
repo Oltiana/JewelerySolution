@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace JewelerySolution.Controllers
 {
 
-    [Authorize(Roles = "Admin")]
+    [AllowAnonymous]
     public class AdminProductController : Controller
     {
         private readonly JeweleryDbContext _context;
